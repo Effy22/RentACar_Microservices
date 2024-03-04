@@ -1,11 +1,8 @@
-server:
-  port: 9094
-
 spring:
-  data:
-    mongodb:
-      host: localhost
-      port: 27017
-      database: RentCar_UserProfile
-      username: rentCarUser
-      password: rentACarUser*
+  cloud:
+    config:
+      uri: ${CONFIG_SERVER_RENTACAR}
+  config:
+    import: "configserver:"
+  application:
+    name: application-user

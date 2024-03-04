@@ -1,5 +1,6 @@
 package com.elif.domain;
 
+import com.elif.utility.enums.EStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,8 +23,13 @@ public class User implements Serializable {
     String name;
     String surname;
     String avatar;
-    String adress;
+    String address;
     String about;
     String phone;
+    @Builder.Default
+    private EStatus status = EStatus.PENDING;
+
+    Long createDate;
+    Long updateDate;
 
 }

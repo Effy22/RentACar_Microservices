@@ -1,11 +1,12 @@
 package com.elif.service;
 
 import com.elif.domain.User;
-import com.elif.dto.request.UserSaveRequestDto;
+import com.elif.dto.request.CreateUserRequestDto;
 import com.elif.exception.ErrorType;
 import com.elif.exception.UserServiceException;
 import com.elif.mapper.UserMapper;
 import com.elif.repository.UserRepository;
+import com.elif.utility.enums.EStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,7 @@ import java.util.Optional;
 public class UserService {
     private final UserRepository userRepository;
 
-    public Boolean createUser(UserSaveRequestDto dto){
+    public Boolean createUser(CreateUserRequestDto dto){
        try{
            userRepository.save(UserMapper.INSTANCE.fromSaveRequestToUser(dto));
            return true;
@@ -26,8 +27,16 @@ public class UserService {
     }
 
     public Boolean activateStatus(Long authId) {
-       // TODO: Tüm metotlar yazılacak.
-        return true;
+       Optional<User> optionalUser = userRepository.findByAuthId(authId);
+       if(optionalUser.isPresent()){
+           optionalUser.get().setStatus(EStatus.ACTIVE);
+           optionalUser.get().setUpdateDate(System.currentTimeMillis());
+           userRepository.save(optionalUser.get());
+           return true;
+       }else{
+           throw new UserServiceException(ErrorType.USER_NOT_FOUND);
+       }
+
     }
 
 }

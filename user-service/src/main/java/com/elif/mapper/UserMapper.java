@@ -1,7 +1,7 @@
 package com.elif.mapper;
 
 import com.elif.domain.User;
-import com.elif.dto.request.UserSaveRequestDto;
+import com.elif.dto.request.CreateUserRequestDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -9,5 +9,5 @@ import org.mapstruct.factory.Mappers;
 public interface UserMapper {
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
-    User fromSaveRequestToUser(UserSaveRequestDto dto);
+    User fromSaveRequestToUser(CreateUserRequestDto dto);
 }

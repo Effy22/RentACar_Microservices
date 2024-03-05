@@ -1,10 +1,12 @@
 package com.elif.service;
 
+import com.elif.dto.request.CreateUserRequestDto;
 import com.elif.dto.request.LoginRequestDto;
 import com.elif.dto.request.RegisterRequestDto;
 import com.elif.entity.Auth;
 import com.elif.exception.AuthServiceException;
 import com.elif.exception.ErrorType;
+import com.elif.manager.UserProfileManager;
 import com.elif.repository.AuthRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AuthService {
     private final AuthRepository authRepository;
+    private final UserProfileManager userProfileManager;
 
 
     public Boolean register(RegisterRequestDto dto){
@@ -30,6 +33,11 @@ public class AuthService {
                     .isActive(true)
                     .build();
             authRepository.save(auth);
+            userProfileManager.createUser(CreateUserRequestDto.builder()
+                            .authId(auth.getId())
+                            .username(auth.getUsername())
+                            .email(auth.getEmail())
+                    .build());
             return true;
         }else{
             throw new AuthServiceException(ErrorType.ERROR_USER_ALLREADY_EXISTS);

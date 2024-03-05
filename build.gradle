@@ -49,8 +49,6 @@ allprojects {
         annotationProcessor libs.lombok
         implementation libs.mapstruct
         annotationProcessor libs.mapstructProcessor
-        implementation libs.jwt
-
 
     }
 

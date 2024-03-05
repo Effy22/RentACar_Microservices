@@ -27,7 +27,7 @@ public class User implements Serializable {
     String about;
     String phone;
     @Builder.Default
-    private EStatus status = EStatus.PENDING;
+    EStatus status = EStatus.PENDING;
 
     Long createDate;
     Long updateDate;

@@ -91,3 +91,7 @@ q
 Aconfig-server/src/main/java/com/elif/ConfigServerApplication.java,8/1/8188fa17b6f67cb5daec834bc7cf466a8fb23548
 ?
 settings.gradle,0/5/05efc8b1657769a27696d478ded1e95f38737233
+y
+Iauth-service/src/main/java/com/elif/dto/request/CreateUserRequestDto.java,6/7/67862a5b1abd6f46e23284a6c2095355c859cbf6
+s
+Cauth-service/src/main/java/com/elif/manager/UserProfileManager.java,5/9/59c4d6ee23d5dafda8fe348264a4f5e6278a58ba

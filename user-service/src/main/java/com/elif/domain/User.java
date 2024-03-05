@@ -5,9 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Builder
@@ -15,6 +18,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Document //For MongoDB
 public class User implements Serializable {
+    @Id
     String id;
     Long authId;
     String username;
@@ -31,5 +35,7 @@ public class User implements Serializable {
 
     Long createDate;
     Long updateDate;
+
+    List<String> rentingIds=new ArrayList<>();
 
 }

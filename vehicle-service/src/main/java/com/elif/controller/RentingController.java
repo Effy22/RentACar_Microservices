@@ -1,7 +1,13 @@
 package com.elif.controller;
-// TODO: Bir kiralama yapıldığında o aracın id'si ile availabilitysini değiştirmem gerek.
 
+
+import com.elif.dto.request.CancellationRequestDto;
+import com.elif.dto.request.RequestRentingDto;
+import com.elif.service.RentingService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import static com.elif.constant.RestApiUrls.*;
@@ -10,6 +16,20 @@ import static com.elif.constant.RestApiUrls.*;
 @RequiredArgsConstructor
 @RequestMapping(RENTING)
 public class RentingController {
-    //TODO: Userid ile uygun aracı bulma, aracı kiralama, aracı iptal etme tarihe göre araç seçme
+    //TODO: Rent isteği, rent iptali.
+    //Role'e bakılıp rentleri listeleme, rentleri araca göre listeleme (servis katmanında)
+
+    private final RentingService rentingService;
+
+
+    @PostMapping(REQUEST_RENTING)
+    public ResponseEntity<String> requestRenting(@RequestBody RequestRentingDto dto) {
+        return ResponseEntity.ok(rentingService.requestRenting(dto));
+    }
+
+    @PostMapping(CANCEL_RENTING)
+    public ResponseEntity<String> cancelRenting(@RequestBody CancellationRequestDto dto) {
+        return ResponseEntity.ok(rentingService.cancelRenting(dto));
+    }
 
 }

@@ -9,3 +9,8 @@ spring:
       database: RentCar_UserProfile
       username: rentCarUser
       password: rentACarUser*
+
+jwt:
+  secretKey: ${java13secretkey}
+  audience: ${java13audience}
+  issuer:   ${java13issuer}

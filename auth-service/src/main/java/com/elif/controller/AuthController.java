@@ -31,12 +31,7 @@ public class AuthController {
     }
     @PostMapping(LOGIN)
     public ResponseEntity<String> doLogin ( @RequestBody @Valid LoginRequestDto dto){
-        Optional<Auth> auth = authService.doLogin(dto);
-        if(auth.isEmpty()){
-            throw new AuthServiceException(ErrorType.ERROR_INVALID_LOGIN_PARAMETER);
-        }
-
-        return ResponseEntity.ok("Welcome..: " + auth.get().getUsername());
+        return ResponseEntity.ok(authService.login(dto));
     }
 
 

@@ -26,6 +26,7 @@ public class User implements Serializable {
     String password;
     String name;
     String surname;
+    Double balance;
     String avatar;
     String address;
     String about;

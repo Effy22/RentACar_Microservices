@@ -21,7 +21,9 @@ ext{
             springCloudOpenFeign                : "org.springframework.cloud:spring-cloud-starter-openfeign:${versions.springCloud}",
             springCloudConfig                   : "org.springframework.cloud:spring-cloud-starter-config:${versions.springCloud}",
             springCloudConfigServer             : "org.springframework.cloud:spring-cloud-config-server:${versions.springCloud}",
-            springCloudConfigClient             : "org.springframework.cloud:spring-cloud-config-client:${versions.springCloud}"
+            springCloudConfigClient             : "org.springframework.cloud:spring-cloud-config-client:${versions.springCloud}",
+            javaJwt                             : "com.auth0:java-jwt:${versions.jwt}"
+
 
     ]
 

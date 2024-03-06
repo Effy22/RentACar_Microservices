@@ -9,10 +9,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository extends MongoRepository<User,String> {
-    Page<User> findByEmail(String email, Pageable pageable); //All returns should be in page format
+    Page<User> findByEmail(String email, Pageable pageable);
     Optional<User> findByAuthId(Long authId);
 
     List<User>  findByAddressContaining (String adress);
 
-    Page<User> findBySurname(String surname, Pageable pageable);
+    Optional<User>  findOptionalByAuthId(Long authId);
+
 }

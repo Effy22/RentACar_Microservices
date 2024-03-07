@@ -2,6 +2,11 @@ server:
   port: 8080
 
 spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: admin
+    password: root
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/RentCar_AuthDB
@@ -15,3 +20,8 @@ jwt:
   secretKey: ${java13secretkey}
   audience: ${java13audience}
   issuer:   ${java13issuer}
+
+rabbitmq:
+  exchange: auth-exchange
+  queue: auth-queue
+  binding_key: auth-binding-key

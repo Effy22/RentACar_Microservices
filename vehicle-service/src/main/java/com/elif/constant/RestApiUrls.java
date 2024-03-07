@@ -11,11 +11,14 @@ public class RestApiUrls {
     public static final String RENTING = ROOT + "/renting";
 
     public static final String REQUEST_RENTING = "/request-renting";
+    public static final String ADD = "/add";
     public static final String CANCEL_RENTING = "/cancel-renting";
+    public static final String ADD_RENTING = "/add-renting";
     public static final String FIND_BY_TOKEN = "/find-by-token";
     public static final String GET_BALANCE = "/get-balance";
     public static final String UPDATE = "/update";
     public static final String GET_ALL = "/get-all";
     public static final String GET_BY_ID = "/get-by-id";
+    public static final String GET_BY_MODEL = "/get-by-model";
 
 }

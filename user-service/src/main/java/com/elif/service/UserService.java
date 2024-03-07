@@ -70,4 +70,16 @@ public class UserService {
         }
         throw new UserServiceException(ErrorType.USER_NOT_FOUND);
     }
+
+    public Boolean addRenting(String vehicleId,String userId) {
+       Optional<User> optionalUser = userRepository.findById(userId);
+       if(optionalUser.isPresent()){
+           User user= optionalUser.get();
+           user.getRentingIds().add(vehicleId);
+           userRepository.save(user);
+           return true;
+       }else{
+           throw new UserServiceException(ErrorType.USER_NOT_FOUND);
+       }
+    }
 }

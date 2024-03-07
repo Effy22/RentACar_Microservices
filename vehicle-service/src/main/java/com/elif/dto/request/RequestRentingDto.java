@@ -1,5 +1,6 @@
 package com.elif.dto.request;
 
+import com.elif.utility.enums.ELocation;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,4 +18,8 @@ public class RequestRentingDto {
     String vehicleId;
     Date startDate;
     Date endDate;
+    ELocation pickUpLocation;
+    ELocation dropOffLocation;
+    Double price;
+    String notes;
 }

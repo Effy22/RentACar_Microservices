@@ -1,43 +1,92 @@
 package com.elif.service;
 
+import com.elif.constant.Calculations;
 import com.elif.dto.request.CancellationRequestDto;
 import com.elif.dto.request.RequestRentingDto;
 import com.elif.entity.Renting;
+import com.elif.entity.Vehicle;
+import com.elif.exception.ErrorType;
+import com.elif.exception.VehicleServiceException;
+import com.elif.manager.UserManager;
 import com.elif.repository.RentingRepository;
 import com.elif.repository.VehicleRepository;
 import com.elif.utility.ServiceManager;
+import com.elif.utility.enums.EStatus;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class RentingService extends ServiceManager<Renting,String> {
 
     private final RentingRepository rentingRepository;
-    private final VehicleRepository vehicleRepository;
+    private final VehicleService vehicleService;
+    private final Calculations calculations;
+    private final UserManager userManager;
 
-    public RentingService(RentingRepository rentingRepository,VehicleRepository vehicleRepository) {
+    public RentingService(RentingRepository rentingRepository,VehicleService vehicleService,Calculations calculations,UserManager userManager) {
         super(rentingRepository);
-        this.vehicleRepository = vehicleRepository;
+        this.vehicleService = vehicleService;
         this.rentingRepository = rentingRepository;
+        this.calculations = calculations;
+        this.userManager = userManager;
     }
 
     public String requestRenting(RequestRentingDto requestRentingDto) {
-        /**
-         * araç id'sinden aracın availability'sini servis ile kontrol etmek gerek,
-         * user id'sinden user'ın bakiyesini kontrol etmek gerek
-         * Bunun için user-microservice'i ile Openfeign koyacağım.
-         *
-         *   /**
-         *          * Token'ın valideliğini kontrol ettik sonra (dtonun içinde)
-         *          * Eğer bu user'ın bakiyesi yetiyorsa araçkiralamaya o zaman talep edilecek
-         *          * Kiralama olduktan sonra aracın availability'ını false yapacak service katmanında
-         *          */
-        // TODO:Metot içi doldurulacak
-        return "Effy";
+
+        Optional<Vehicle> optionalVehicle = vehicleService.findById(requestRentingDto.getVehicleId());
+        if(optionalVehicle.isPresent()){
+
+            Vehicle vehicle = optionalVehicle.get();
+
+            if(vehicle.getStatus().equals(EStatus.AVAILABLE) && vehicle.getFuel()>35){
+
+                Double price = calculations.calculateRentingPrice(
+                        requestRentingDto.getStartDate(),
+                        requestRentingDto.getEndDate(),vehicle.getDailyPrice()
+                );
+
+               Double userBalance= userManager.getUserBalance(requestRentingDto.getUserId()).getBody();
+
+                if(userBalance>=price){
+                    rentingRepository.save(Renting.builder()
+                            .price(price)
+                            .startDate(requestRentingDto.getStartDate())
+                            .endDate(requestRentingDto.getEndDate())
+                            .userId(requestRentingDto.getUserId())
+                            .createDate(System.currentTimeMillis())
+                            .vehicleId(requestRentingDto.getVehicleId())
+                            .pickUpLocation(requestRentingDto.getPickUpLocation())
+                            .dropOffLocation(requestRentingDto.getDropOffLocation())
+                            .notes(requestRentingDto.getNotes())
+                            .build());
+                    vehicle.setStatus(EStatus.NOT_AVAILABLE);
+                    vehicleService.save(vehicle);
+
+                    return "İstemiş olduğunuz araç kiralanmak için uygundur. Kiralama işleminiz başarılı bir şekilde gerçekleşti.";
+                }else{
+                    throw new VehicleServiceException(ErrorType.NOT_ENOUGH_BALANCE);
+                }
+            }else{
+                throw new VehicleServiceException(ErrorType.VEHICLE_CANNOT_FOUND);
+            }
+        }else{
+            throw new VehicleServiceException(ErrorType.RENTING_ERROR);
+        }
+
 
     }
 
     public String cancelRenting(CancellationRequestDto dto) {
-        // TODO:Metot içi doldurulacak
-        return "METOT YAZILACAK";
+        Optional<Renting> optionalRenting = rentingRepository.findById(dto.getId());
+
+        if (optionalRenting.isPresent()) {
+            Renting renting = optionalRenting.get();
+            rentingRepository.deleteById(renting.getId());
+            return "Kiralama işleminiz iptal edildi.";
+        } else {
+            throw new VehicleServiceException(ErrorType.RENTING_NOT_FOUND);
+        }
+
     }
 }

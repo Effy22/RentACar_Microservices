@@ -1,7 +1,12 @@
 package com.elif.controller;
+import com.elif.dto.request.VehicleAddRequestDto;
+import com.elif.entity.Vehicle;
+import com.elif.service.VehicleService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static com.elif.constant.RestApiUrls.*;
 
@@ -10,12 +15,17 @@ import static com.elif.constant.RestApiUrls.*;
 @RequestMapping(VEHICLE)
 public class VehicleController {
 
-    //TODO: Available araçları bulma, son konuma göre araç bulma, id ile araç bulma
-    /**
-     * Aracınyakıtdurumunu,saatlik,günlükvehaftalıkkiralamafiyatlarınıgörüntüler, yakıt durumu belli koşulları
-     * karşılamayan araçlar görüntülenmez. (Bu koşullar uygulama sahibi tarafından belirlenir.)
-     * a. İstediğisaat,günyadahaftamiktarındakiralayabilir,24saatkiralamak istediği durumlarda durumlarda günlük
-     * ücret üzerinden, 36 saat kiralamak istediği durumlarda 1 gün ve 12 saatlik kiralama ücreti üzerinden hesaplanır.
-     */
+    private final VehicleService vehicleService;
+
+
+    @PostMapping(ADD)
+    public ResponseEntity<Boolean> addVehicle(@RequestBody VehicleAddRequestDto dto){
+        return ResponseEntity.ok(vehicleService.addVehicle(dto));
+    }
+
+    @GetMapping(GET_ALL)
+    public ResponseEntity<List<Vehicle>> getAll(){
+        return ResponseEntity.ok(vehicleService.getAll());
+    }
 
 }

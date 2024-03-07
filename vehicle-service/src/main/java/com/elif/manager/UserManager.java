@@ -18,5 +18,8 @@ public interface UserManager {
     @GetMapping(FIND_BY_TOKEN)
     public ResponseEntity<UserResponseDto> findUserByToken(@RequestParam String token);
 
+    @GetMapping(ADD_RENTING)
+    public ResponseEntity<Boolean> addRenting(@RequestParam String vehicleId, String userId);
+
 
 }

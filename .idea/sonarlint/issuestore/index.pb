@@ -141,14 +141,6 @@ s
 Cvehicle-service/src/main/java/com/elif/utility/enums/ELocation.java,d/f/df454e40ae2d46ba001482fa634043bfb142bfc0
 y
 Ivehicle-service/src/main/java/com/elif/dto/request/RequestRentingDto.java,b/2/b28444aabe9f3320c2a84b5e898cf2b0c125be55
-}
-Mvehicle-service/src/main/java/com/elif/dto/request/UserRentingRequestDto.java,5/9/59d17d6addd67d78f827a84a05c1ab745f1f2cc9
-z
-Juser-service/src/main/java/com/elif/dto/request/UserRentingRequestDto.java,9/f/9f6d8d26b9ed7a19aea5e7ad99c787952e6094e8
-o
-?user-service/src/main/java/com/elif/manager/VehicleManager.java,2/b/2b09acb2e711ba2dd239cac7a32bb7ae3c8a9fb9
-o
-?user-service/src/main/java/com/elif/manager/RentingManager.java,2/8/28d95536f3ea9851839eba445e174e2aea6f5fae
 o
 ?vehicle-service/src/main/java/com/elif/manager/UserManager.java,f/b/fb9db90454008b66bca42d3e86453ebdb7edc788
 u
@@ -161,3 +153,9 @@ x
 Hvehicle-service/src/main/java/com/elif/dto/response/UserResponseDto.java,2/6/26f18fe5adcaa981a15dcb5e9944d62db23af1b4
 ~
 Nvehicle-service/src/main/java/com/elif/dto/request/CancellationRequestDto.java,f/0/f060993129d1423a02268004bb74bbd494ebbec3
+q
+Avehicle-service/src/main/java/com/elif/constant/Calculations.java,f/c/fc9aaa64f8cfde22db5fd9f9dc9ceed9b1693038
+|
+Lvehicle-service/src/main/java/com/elif/dto/request/VehicleAddRequestDto.java,0/b/0bf34c3c28dd1ae6b0c11089a813611a166ac200
+p
+@vehicle-service/src/main/java/com/elif/mapper/VehicleMapper.java,1/5/156404f876e9750372a55107520768e870d5b886

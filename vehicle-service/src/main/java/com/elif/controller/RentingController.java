@@ -16,8 +16,6 @@ import static com.elif.constant.RestApiUrls.*;
 @RequiredArgsConstructor
 @RequestMapping(RENTING)
 public class RentingController {
-    //TODO: Rent isteği, rent iptali.
-    //Role'e bakılıp rentleri listeleme, rentleri araca göre listeleme (servis katmanında)
 
     private final RentingService rentingService;
 

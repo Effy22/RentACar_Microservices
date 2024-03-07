@@ -17,7 +17,6 @@ public class VehicleController {
 
     private final VehicleService vehicleService;
 
-
     @PostMapping(ADD)
     public ResponseEntity<Boolean> addVehicle(@RequestBody VehicleAddRequestDto dto){
         return ResponseEntity.ok(vehicleService.addVehicle(dto));

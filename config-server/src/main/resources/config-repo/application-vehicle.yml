@@ -9,3 +9,7 @@ spring:
       database: RentCar_Vehicle
       username: rentCarVehicleAdmin
       password: rentCarVehicleAdmin*
+  elasticsearch:
+    uris: http://localhost:9200
+    username: admin
+    password: root

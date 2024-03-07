@@ -12,6 +12,7 @@ public class RestApiUrls {
 
     public static final String REQUEST_RENTING = "/request-renting";
     public static final String ADD = "/add";
+    public static final String CREATE = "/create";
     public static final String CANCEL_RENTING = "/cancel-renting";
     public static final String ADD_RENTING = "/add-renting";
     public static final String FIND_BY_TOKEN = "/find-by-token";

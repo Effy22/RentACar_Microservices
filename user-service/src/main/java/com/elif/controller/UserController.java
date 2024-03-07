@@ -36,8 +36,8 @@ public class UserController {
     }
 
     @GetMapping(ADD_RENTING)
-    public ResponseEntity<Boolean> addRenting(@RequestParam String vehicleId, String userId) {
-        return ResponseEntity.ok(userService.addRenting(vehicleId, userId));
+    public ResponseEntity<Boolean> addRenting(@RequestParam String rentingId, String userId) {
+        return ResponseEntity.ok(userService.addRenting(rentingId, userId));
     }
 
 

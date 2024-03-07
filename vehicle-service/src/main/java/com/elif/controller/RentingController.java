@@ -30,4 +30,5 @@ public class RentingController {
         return ResponseEntity.ok(rentingService.cancelRenting(dto));
     }
 
+
 }

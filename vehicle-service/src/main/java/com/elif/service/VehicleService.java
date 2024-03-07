@@ -1,9 +1,11 @@
 package com.elif.service;
 
 import com.elif.dto.request.VehicleAddRequestDto;
+import com.elif.dto.request.VehicleSaveDto;
 import com.elif.entity.Vehicle;
 import com.elif.exception.ErrorType;
 import com.elif.exception.VehicleServiceException;
+import com.elif.manager.ElasticVehicleManager;
 import com.elif.mapper.VehicleMapper;
 import com.elif.repository.VehicleRepository;
 import com.elif.utility.ServiceManager;
@@ -17,10 +19,12 @@ import java.util.Optional;
 @Service
 public class VehicleService extends ServiceManager<Vehicle,String> {
     private final VehicleRepository vehicleRepository;
+    private final ElasticVehicleManager elasticVehicleManager;
 
-    public VehicleService(VehicleRepository vehicleRepository) {
+    public VehicleService(VehicleRepository vehicleRepository, ElasticVehicleManager elasticVehicleManager) {
         super(vehicleRepository);
         this.vehicleRepository = vehicleRepository;
+        this.elasticVehicleManager = elasticVehicleManager;
     }
 
     public Optional<Vehicle> findByModelAndStatus(EModel model, EStatus status) {
@@ -34,6 +38,8 @@ public class VehicleService extends ServiceManager<Vehicle,String> {
            throw new VehicleServiceException(ErrorType.VEHICLE_ALREADY_EXISTS);
        }else{
            vehicleRepository.save(vehicle);
+           VehicleSaveDto vehicleSaveDto = VehicleMapper.INSTANCE.fromVehicleToVehicleSaveDto(vehicle);
+           elasticVehicleManager.save(vehicleSaveDto);
            return true;
        }
 
@@ -43,6 +49,7 @@ public class VehicleService extends ServiceManager<Vehicle,String> {
     public List<Vehicle> getAll() {
         List<Vehicle> availableVehicles =vehicleRepository.findAllByStatus(EStatus.AVAILABLE);
         if(availableVehicles.isEmpty()){
+            //TODO: FUEL KONTROLÜ
             throw new VehicleServiceException(ErrorType.VEHICLE_NOT_FOUND);
         }else{
             return availableVehicles;

@@ -24,7 +24,9 @@
 
 # ADIMLAR;
   - OpenFeign ekleyip auth'tan user'a kullanıcı bilgisi göndermek +
-  - RabbitMq ekleyip bilgilerin serverlar patlası bile kuyrukta olmasını sağlamak Auth'tan User'a
+  - RabbitMq ekleyip bilgilerin serverlar patlası bile kuyrukta olmasını sağlamak Auth'tan User'a +
   - Kiralama Modülü +, Ödeme Modülü ekleme (DB'leri konusunda ElasticSearch entegre etme) 
   - Spring Cloud Gateway Ekleme
   - En son ön yüz ekleme HTML 
+  - Vehicle'a araç listemede redis olabilir. mongodb 
+  - elastic ile mongo 

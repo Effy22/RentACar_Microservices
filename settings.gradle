@@ -2,6 +2,6 @@ rootProject.name = 'RentACar_Microservices'
 include 'auth-service'
 include 'user-service'
 include 'config-server'
-include 'renting-service'
 include 'vehicle-service'
+include 'elastic-service'
 

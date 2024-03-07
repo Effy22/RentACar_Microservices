@@ -7,9 +7,9 @@ import com.elif.entity.Renting;
 import com.elif.entity.Vehicle;
 import com.elif.exception.ErrorType;
 import com.elif.exception.VehicleServiceException;
+import com.elif.manager.ElasticRentingManager;
 import com.elif.manager.UserManager;
 import com.elif.repository.RentingRepository;
-import com.elif.repository.VehicleRepository;
 import com.elif.utility.ServiceManager;
 import com.elif.utility.enums.EStatus;
 import org.springframework.stereotype.Service;
@@ -23,13 +23,15 @@ public class RentingService extends ServiceManager<Renting,String> {
     private final VehicleService vehicleService;
     private final Calculations calculations;
     private final UserManager userManager;
+    private final ElasticRentingManager elasticRentingManager;
 
-    public RentingService(RentingRepository rentingRepository,VehicleService vehicleService,Calculations calculations,UserManager userManager) {
+    public RentingService(RentingRepository rentingRepository,VehicleService vehicleService,Calculations calculations,UserManager userManager,ElasticRentingManager elasticRentingManager) {
         super(rentingRepository);
         this.vehicleService = vehicleService;
         this.rentingRepository = rentingRepository;
         this.calculations = calculations;
         this.userManager = userManager;
+        this.elasticRentingManager = elasticRentingManager;
     }
 
     public String requestRenting(RequestRentingDto requestRentingDto) {
@@ -49,7 +51,7 @@ public class RentingService extends ServiceManager<Renting,String> {
                Double userBalance= userManager.getUserBalance(requestRentingDto.getUserId()).getBody();
 
                 if(userBalance>=price){
-                    rentingRepository.save(Renting.builder()
+                    Renting renting = Renting.builder()
                             .price(price)
                             .startDate(requestRentingDto.getStartDate())
                             .endDate(requestRentingDto.getEndDate())
@@ -59,9 +61,13 @@ public class RentingService extends ServiceManager<Renting,String> {
                             .pickUpLocation(requestRentingDto.getPickUpLocation())
                             .dropOffLocation(requestRentingDto.getDropOffLocation())
                             .notes(requestRentingDto.getNotes())
-                            .build());
+                            .build();
+                    rentingRepository.save(renting);
                     vehicle.setStatus(EStatus.NOT_AVAILABLE);
                     vehicleService.save(vehicle);
+                    userManager.addRenting(renting.getId(),requestRentingDto.getUserId());
+
+                    //TODO: Elastic'e gönderilecek save metodu ile.
 
                     return "İstemiş olduğunuz araç kiralanmak için uygundur. Kiralama işleminiz başarılı bir şekilde gerçekleşti.";
                 }else{

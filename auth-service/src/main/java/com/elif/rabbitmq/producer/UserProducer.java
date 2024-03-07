@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class UserProducer {
     private final RabbitTemplate rabbitTemplate;
 
-    public void sendUserMessage(UserModel model){
+    public void sendMessage(UserModel model){
         rabbitTemplate.convertAndSend("auth-exchange","auth-binding-key",model);
     }
 }

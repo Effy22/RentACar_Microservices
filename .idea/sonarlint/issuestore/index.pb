@@ -407,3 +407,7 @@ r
 Belastic-service/src/main/java/com/elif/exception/ErrorMessage.java,a/3/a3a6d00bf2ae654087424a3fdec201b298e628d5
 q
 Aelastic-service/src/main/java/com/elif/constant/Calculations.java,e/8/e81b8ed63e7144d4ce0d8f276e321a1906633d77
+n
+>elastic-service/src/main/java/com/elif/dto/RentingSaveDto.java,3/e/3ea9525bf8ebfcb73d34d14fd2626f9bcaea3244
+n
+>user-service/src/main/java/com/elif/config/RabbitMQConfig.java,7/8/784953ecc00faad3e38995d973925d1aa0d1c5ab

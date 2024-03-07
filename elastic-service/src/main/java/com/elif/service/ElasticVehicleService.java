@@ -47,7 +47,7 @@ public class ElasticVehicleService extends ServiceManager<Vehicle,String> {
                 .color(dto.color())
                 .fuel(dto.fuel())
                 .category(dto.category())
-                .createDate(System.currentTimeMillis())
+                .updateDate(System.currentTimeMillis())
                 .description(dto.description())
                 .kilometers(dto.kilometers())
                 .dailyPrice(dto.dailyPrice())

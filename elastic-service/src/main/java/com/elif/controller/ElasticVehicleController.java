@@ -18,13 +18,13 @@ public class ElasticVehicleController {
 
 
     @PostMapping(CREATE)
-    private ResponseEntity<Boolean> save(@RequestBody VehicleSaveDto dto){
+    public ResponseEntity<Boolean> save(@RequestBody VehicleSaveDto dto){
         elasticVehicleService.save(dto);
         return ResponseEntity.ok().build();
     }
 
     @PostMapping(UPDATE)
-    private  ResponseEntity<Boolean> update(@RequestBody VehicleSaveDto dto){
+    public ResponseEntity<Boolean> update(@RequestBody VehicleSaveDto dto){
         elasticVehicleService.update(dto);
         return ResponseEntity.ok().build();
     }

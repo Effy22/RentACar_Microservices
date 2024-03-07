@@ -5,4 +5,6 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
 
 public interface ElasticRentingRepository extends ElasticsearchRepository <Renting,String> {
 
+    Iterable<Renting> findAllByUserId(String userId);
+
 }

@@ -30,3 +30,8 @@
   - En son ön yüz ekleme HTML 
   - Vehicle'a araç listemede redis olabilir. mongodb 
   - elastic ile mongo 
+
+EG NOT:
+    Kiralama kısmı için elastic-modülüne eklemeler yapılacak. gereksiz metotlar en son silinecek. ödeme modülü yapılacak.
+
+    Elastic service eklendi, 

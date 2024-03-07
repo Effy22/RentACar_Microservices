@@ -19,3 +19,8 @@ jwt:
   secretKey: ${java13secretkey}
   audience: ${java13audience}
   issuer:   ${java13issuer}
+
+rabbitmq:
+  exchange: auth-exchange
+  queue: auth-queue
+  binding_key: auth-binding-key

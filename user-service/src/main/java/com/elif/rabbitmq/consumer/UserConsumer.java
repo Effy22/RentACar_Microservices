@@ -15,7 +15,7 @@ public class UserConsumer {
 
     @RabbitListener(queues = "auth-queue")
     public void createUserListener(UserModel model){
-
+        System.out.println("Kuyruk gelen mesaj..: "+ model);
         userService.createUser(CreateUserRequestDto.builder()
                 .email(model.getEmail())
                 .username(model.getUsername())

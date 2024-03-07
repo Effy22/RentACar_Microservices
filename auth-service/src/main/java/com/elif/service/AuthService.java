@@ -7,6 +7,8 @@ import com.elif.entity.Auth;
 import com.elif.exception.AuthServiceException;
 import com.elif.exception.ErrorType;
 import com.elif.manager.UserProfileManager;
+import com.elif.rabbitmq.model.UserModel;
+import com.elif.rabbitmq.producer.UserProducer;
 import com.elif.repository.AuthRepository;
 import com.elif.utility.JwtTokenManager;
 import com.elif.utility.enums.EStatus;
@@ -19,9 +21,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AuthService {
     private final AuthRepository authRepository;
-    private final UserProfileManager userProfileManager;
+   // private final UserProfileManager userProfileManager; //Rabbit yerine OpenFeign kullanılacak ise.
     private final JwtTokenManager jwtTokenManager;
-
+    private final UserProducer userProducer;
 
     public Boolean register(RegisterRequestDto dto){
         Optional<Auth> optionalAuth1 = authRepository.findOptionalByUsername(dto.getUsername());
@@ -36,10 +38,17 @@ public class AuthService {
                     .isActive(true)
                     .build();
             authRepository.save(auth);
-            userProfileManager.createUser(CreateUserRequestDto.builder()
+//            Eğer userProfileManager kullanılacak ise aşağıdaki metot;
+//            userProfileManager.createUser(CreateUserRequestDto.builder()
+//                            .authId(auth.getId())
+//                            .username(auth.getUsername())
+//                            .email(auth.getEmail())
+//                    .build());
+            userProducer.sendMessage(UserModel.builder()
                             .authId(auth.getId())
-                            .username(auth.getUsername())
                             .email(auth.getEmail())
+                            .username(auth.getUsername())
+                            .password(auth.getPassword())
                     .build());
             return true;
         }else{

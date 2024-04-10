@@ -29,12 +29,5 @@
   - Spring Cloud Gateway Ekleme
   - En son ön yüz ekleme HTML 
   - Vehicle'a araç listemede redis olabilir. mongodb 
-  - elastic ile mongo 
+  - elastic ile mongoDB eklendi.
 
-EG NOT:
-    Kiralama kısmı için elastic-modülüne eklemeler yapılacak. gereksiz metotlar en son silinecek. ödeme modülü yapılacak.
-
-    Elastic service eklendi, 
-
-YAPILACAKLAR:
-    Gateway ekle ona da security ekle muhammet hocanın elastic'inde olan
